@@ -1,0 +1,10 @@
+services:
+    tasmota:
+      build: .
+      container_name: tasmota-prometheus-exporter
+      restart: always
+      ports:
+        - 9093:9093
+      environment:
+        - PORT=9093
+        - FLASK_ENV=production
