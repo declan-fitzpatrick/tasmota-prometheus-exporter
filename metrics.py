@@ -21,9 +21,9 @@ UNIT_MAPPING = {
     "apparent_power": "VA",
     "reactive_power": "var",
     "power_factor": "",  # No unit for power factor (0-1 ratio)
-    "energy_today": "kWh",
-    "energy_yesterday": "kWh",
-    "energy_total": "kWh",
+    "today": "kWh",
+    "yesterday": "kWh",
+    "total": "kWh",
 }
 
 class TasmotaCollector:
@@ -85,6 +85,8 @@ class TasmotaCollector:
 
             # Choose metric type dynamically
             if "today" in metric_base_name or "yesterday" in metric_base_name or "total" in metric_base_name:
+                if "total" in metric_base_name:
+                    metric_name = metric_name.replace("_total","")
                 r = CounterMetricFamily(metric_name, key, labels=["device"])
             else:
                 r = GaugeMetricFamily(metric_name, key, labels=["device"])
