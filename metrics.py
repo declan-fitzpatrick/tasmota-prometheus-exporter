@@ -52,11 +52,12 @@ class TasmotaCollector:
             response.raise_for_status()
 
             data = response.json()
-            power_state = data.get("POWER", "OFF")  # Default to OFF if missing
+            power_state = data.get("POWER", "OFF")
             return 1 if power_state == "ON" else 0
 
         except requests.exceptions.RequestException as e:
             print(f"Error fetching switch state from {self.target}: {e}")
+            return 0
 
     def collect(self):
         power_state = self.fetch_power_state()
