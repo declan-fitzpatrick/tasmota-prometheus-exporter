@@ -49,7 +49,7 @@ To integrate with Prometheus, add the following scrape configuration to your `pr
 ```yaml
 scrape_configs:
    - job_name: "tasmota"
-     metrics_path: /probe
+     metrics_path: /tasmota
      scheme: http 
      static_configs:
        - targets:
